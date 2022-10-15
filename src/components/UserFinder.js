@@ -2,6 +2,7 @@ import {   Component } from 'react';
 import styles from './UserFinder.module.css';
 import Users from './Users';
 import UsersContext from '../store/users-context';
+import ErrorBoundary from "./ErrorBoundary";
 
 class UserFinder extends Component {
 	static contextType = UsersContext;
@@ -32,7 +33,9 @@ class UserFinder extends Component {
 	return (
 	  <div style={{textAlign:"center"}}>
 		<input type='search' className={styles.finder} onChange={this.searchChangeHandler.bind(this)} />
-		<Users users={this.state.filteredUsers} />
+		  <ErrorBoundary>
+		  	<Users users={this.state.filteredUsers} />
+		  </ErrorBoundary>
 	  </div>
 	);
   }
